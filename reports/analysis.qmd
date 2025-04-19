@@ -85,6 +85,7 @@ knitr::kable(conf_mat$table)
 ```{r pack}
 #| echo: false
 #| tbl-cap: Package usage.
+#| cache: false
 # Run 05_package.R
 func_outputs <- readr::read_csv("~/work/output/func_outputs.csv", show_col_types = FALSE)
 knitr::kable(func_outputs)

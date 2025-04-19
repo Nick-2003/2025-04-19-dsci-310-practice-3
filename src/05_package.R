@@ -7,14 +7,14 @@ Options:
 " -> doc
 
 library(docopt)
-library(regexcite20250416)
+library(package20250419)
 
 opt <- docopt::docopt(doc)
 
 # Explicit namespace use
-calls <- c("regexcite20250416::is_leap(2000)", 
-           "regexcite20250416::is_leap(1900)", 
-           "regexcite20250416::temp_conv(41, 'F', 'C')")
+calls <- c("package20250419::is_leap(2000)", 
+           "package20250419::is_leap(1900)", 
+           "package20250419::temp_conv(41, 'F', 'C')")
 
 # Evaluate each safely
 outputs <- sapply(calls, function(call) {
