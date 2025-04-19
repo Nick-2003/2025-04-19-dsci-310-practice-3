@@ -1,4 +1,3 @@
-```R
 "This script performs exploratory data analysis (EDA) and prepares the data for modeling
 
 Usage: src/02-methods.R --input_path=<input_path> --output_path_summary=<output_path_summary> --output_path_plot=<output_path_plot> --output_path_data=<output_path_data>
@@ -17,7 +16,8 @@ library(ggplot2)
 
 opt <- docopt::docopt(doc)
 
-data <- readr::read_csv(opt$input_path)
+data <- readr::read_csv(opt$input_path) %>%
+  dplyr::mutate(species = as.factor(species))
 
 # Summary statistics
 dplyr::glimpse(data)
@@ -39,6 +39,6 @@ data <- data %>%
   dplyr::mutate(species = as.factor(species))
 
 # Save data
-readr::write_csv(summary, opt$output_path_summary) # "output/penguins_summary.csv"
-ggplot2::ggsave(opt$output_path_plot, penguins_boxplot) # "output/penguins_boxplot.png"
-readr::write_csv(data, opt$output_path_data) # "data/processed/penguins_processed.csv"
+readr::write_csv(summary, opt$output_path_summary) # "work/output/penguins_summary.csv"
+ggplot2::ggsave(opt$output_path_plot, penguins_boxplot) # "work/output/penguins_boxplot.png"
+readr::write_csv(data, opt$output_path_data) # "work/data/processed/penguins_processed.csv"

@@ -1,4 +1,3 @@
-```R
 "This script loads data for analysis
 
 Usage: src/01-load_data.R --output_path=<output_path>
@@ -20,4 +19,4 @@ data <- palmerpenguins::penguins
 data <- data %>% tidyr::drop_na()
 
 # Save data
-readr::write_csv(data, opt$output_path) # "data/raw/penguins.csv"
+readr::write_csv(data, opt$output_path) # "work/data/raw/penguins.csv"

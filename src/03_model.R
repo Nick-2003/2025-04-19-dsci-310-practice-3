@@ -1,4 +1,3 @@
-```R
 "This script fits a classification model using `tidymodels` to predict the species of a penguin based on its physical characteristics
 
 Usage: src/03-model.R --input_path=<input_path> --output_path_train=<output_path_train> --output_path_test=<output_path_test> --output_path_model=<output_path_model>
@@ -18,7 +17,8 @@ library(parsnip)
 library(workflows)
 
 opt <- docopt::docopt(doc)
-data <- readr::read_csv(opt$input_path)
+data <- readr::read_csv(opt$input_path) %>%
+  dplyr::mutate(species = as.factor(species))
 
 # Split data
 set.seed(123)
@@ -37,11 +37,11 @@ penguin_workflow <- workflows::workflow() %>%
 
 # Fit model
 penguin_fit <- penguin_workflow %>%
-  workflows::fit(data = train_data)
+  parsnip::fit(data = train_data)
 
 # Save model
-readr::write_rds(penguin_fit, opt$output_path_model) # "output/penguin_fit.rds"
+readr::write_rds(penguin_fit, opt$output_path_model) # "work/output/penguin_fit.rds"
 
 # Save train and test data
-readr::write_csv(train_data, opt$output_path_train) # "data/processed/penguins_train.csv"
-readr::write_csv(test_data, opt$output_path_test) # "data/processed/penguins_test.csv"
+readr::write_csv(train_data, opt$output_path_train) # "work/data/processed/penguins_train.csv"
+readr::write_csv(test_data, opt$output_path_test) # "work/data/processed/penguins_test.csv"

@@ -1,4 +1,3 @@
-```R
 "This script tests the usage of packages in the report
 
 Usage: src/05-package.R --output_path=<output_path>
@@ -9,6 +8,8 @@ Options:
 
 library(docopt)
 library(regexcite20250416)
+
+opt <- docopt::docopt(doc)
 
 # Explicit namespace use
 calls <- c("regexcite20250416::is_leap(2000)", 
@@ -31,3 +32,6 @@ func_outputs <- data.frame(
   stringsAsFactors = FALSE
 )
 func_outputs
+
+# Write to file
+readr::write_csv(func_outputs, opt$output_path) # "work/output/func_outputs.csv"
